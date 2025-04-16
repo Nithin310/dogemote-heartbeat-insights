@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,15 +53,15 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				/* DogEmote AI Custom Colors */
+				dog: {
+					blue: 'hsl(var(--dog-blue))',
+					yellow: 'hsl(var(--dog-yellow))',
+					orange: 'hsl(var(--dog-orange))',
+					pink: 'hsl(var(--dog-pink))',
+					peach: 'hsl(var(--dog-peach))',
+					purple: 'hsl(var(--dog-purple))',
+					'light-purple': 'hsl(var(--dog-light-purple))',
 				}
 			},
 			borderRadius: {
@@ -84,11 +85,23 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'wiggle': {
+					'0%, 100%': { transform: 'rotate(-3deg)' },
+					'50%': { transform: 'rotate(3deg)' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'wiggle': 'wiggle 1s ease-in-out infinite',
+			},
+			fontFamily: {
+				montserrat: ['Montserrat', 'sans-serif'],
+				opensans: ['Open Sans', 'sans-serif'],
+			},
+			backgroundImage: {
+				'paw-pattern': "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEzLjMgNi44Yy0uMy0xLjEtMS0xLjQtMS41LTEuNC0uNiAwLTEuNS41LTEuNSAxLjYgMCAuOS43IDIuMSAxLjMgMi4xLjYgMCAxLjgtMS4xIDEuNy0yLjN6bS0zLjYgMWMtLjctLjctMS41LS44LTItLjQtLjUuNC0uOCAxLjMtLjMgMi4zLjQgMS4xIDEuNCAyLjcgMiAzIC44LjIgMi0xLjkgLjMtNC45em0zLjcuN2MtLjYuNi0uNyAxLjUtLjQgMiAuNC41IDEuMy44IDIuMy4zIDEuMS0uNCAyLjctMS40IDMtMiAuMi0uOC0xLjktMi0uMy0yYTE1IDE1IDAgMDEtNC42IDEuN3ptMy43LTVjLTEuMS0xLjItMi4xLTEuNC0yLjYtMS4yLS40LjItLjcgMS4xIDAgMi4yLjUgMSAxLjUgMi40IDIuMiAyLjcuOC4zIDEuNS0yLjQgMS40LTMuN2gtMXptLTggMS41Yy0xLjIgMS4xLTEuNCAxLjItMS4yIDEuNi4yLjQuMiAxLjEgMi4yIDAgMSAuMyAxLjUtMi40IDAtMi43bC0xIDF6IiBmaWxsPSIjZjlmOWY5IiBvcGFjaXR5PSIuMDciLz48L3N2Zz4=')"
 			}
 		}
 	},
