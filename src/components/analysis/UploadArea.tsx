@@ -1,7 +1,7 @@
 
 import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Upload, Image, X } from 'lucide-react';
+import { Upload, X } from 'lucide-react';
 import { toast } from "sonner";
 
 interface UploadAreaProps {
