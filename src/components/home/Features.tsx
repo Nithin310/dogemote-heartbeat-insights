@@ -1,5 +1,6 @@
 
 import { SmilePlus, Activity, HeartPulse, BrainCircuit } from 'lucide-react';
+import { AlertTriangle } from '../icons/CustomIcons';
 
 const Features = () => {
   return (

@@ -1,7 +1,8 @@
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Brain, Heart, Shield, DogBowl, PawPrint } from "lucide-react";
+import { Brain, Heart, Shield, PawPrint } from "lucide-react";
+import { DogBowl } from "../components/icons/CustomIcons";
 
 const About = () => {
   return (
