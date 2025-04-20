@@ -1,39 +1,38 @@
 
-import { SmilePlus, Frown, Activity, AlertTriangle, Loader2 } from 'lucide-react';
+import { SmilePlus, Activity, AlertTriangle, Brain, Loader2, Heart } from 'lucide-react';
 import { motion } from "framer-motion";
 
 interface ResultsDisplayProps {
   isLoading: boolean;
-  results: any; // This would be typed properly in a real implementation
+  results: any;
 }
 
 const ResultsDisplay = ({ isLoading, results }: ResultsDisplayProps) => {
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 text-center">
-        <div className="rounded-full bg-purple-100 p-4 mb-4">
+      <div className="flex flex-col items-center justify-center py-16 text-center">
+        <motion.div 
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="rounded-full bg-purple-100 p-4 mb-4"
+        >
           <Loader2 className="h-8 w-8 text-purple-600 animate-spin" />
-        </div>
-        <h3 className="text-xl font-semibold mb-2 font-montserrat">Analyzing...</h3>
-        <p className="text-gray-500">
-          Our AI is examining your dog's emotions and health indicators
+        </motion.div>
+        <h3 className="text-2xl font-semibold mb-2 font-montserrat">Analyzing...</h3>
+        <p className="text-gray-600">
+          Our AI is examining your dog's emotions and behavior patterns
         </p>
       </div>
     );
   }
 
-  if (!results) {
-    return null;
-  }
+  if (!results) return null;
 
-  // Simple animations for results
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
-      transition: { 
-        staggerChildren: 0.2
-      }
+      transition: { staggerChildren: 0.2 }
     }
   };
 
@@ -44,117 +43,88 @@ const ResultsDisplay = ({ isLoading, results }: ResultsDisplayProps) => {
 
   return (
     <motion.div 
-      className="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden"
+      className="p-8"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
-      <div className="p-6 sm:p-8">
-        <motion.div variants={itemVariants} className="mb-8">
-          <h3 className="text-2xl font-semibold mb-4 font-montserrat">Analysis Results</h3>
-          <p className="text-gray-700">
-            Here's what we detected based on your dog's photo:
-          </p>
+      <motion.div variants={itemVariants} className="mb-8">
+        <h3 className="text-2xl font-semibold mb-4 font-montserrat text-gray-800">Analysis Results</h3>
+        <p className="text-gray-700">
+          Here's what we detected in your dog's photo:
+        </p>
+      </motion.div>
+
+      <div className="grid sm:grid-cols-2 gap-6 mb-8">
+        <motion.div variants={itemVariants} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6">
+          <div className="flex items-center mb-4">
+            <Heart className="h-6 w-6 text-blue-600 mr-3" />
+            <h4 className="font-montserrat font-semibold text-lg text-gray-800">Emotions</h4>
+          </div>
+          <div className="space-y-4">
+            {Object.entries(results.emotions).map(([emotion, value]) => (
+              <div key={emotion}>
+                <div className="flex justify-between mb-1">
+                  <span className="text-gray-700 font-medium capitalize">{emotion}</span>
+                  <span className="text-blue-600 font-medium">{value}%</span>
+                </div>
+                <div className="w-full bg-blue-100 rounded-full h-2.5">
+                  <div 
+                    className="bg-gradient-to-r from-blue-500 to-indigo-500 h-2.5 rounded-full transition-all duration-1000"
+                    style={{ width: `${value}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
-          <motion.div variants={itemVariants} className="bg-blue-50 rounded-xl p-5">
-            <div className="flex items-center mb-4">
-              <SmilePlus className="h-6 w-6 text-blue-600 mr-3" />
-              <h4 className="font-montserrat font-semibold text-lg">Emotions</h4>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between mb-1">
-                  <span className="text-gray-700 font-medium">Happiness</span>
-                  <span className="text-blue-600 font-medium">92%</span>
-                </div>
-                <div className="w-full bg-blue-200/50 rounded-full h-2">
-                  <div className="bg-blue-500 h-2 rounded-full" style={{ width: "92%" }}></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between mb-1">
-                  <span className="text-gray-700 font-medium">Curiosity</span>
-                  <span className="text-blue-600 font-medium">65%</span>
-                </div>
-                <div className="w-full bg-blue-200/50 rounded-full h-2">
-                  <div className="bg-blue-500 h-2 rounded-full" style={{ width: "65%" }}></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between mb-1">
-                  <span className="text-gray-700 font-medium">Anxiety</span>
-                  <span className="text-blue-600 font-medium">12%</span>
-                </div>
-                <div className="w-full bg-blue-200/50 rounded-full h-2">
-                  <div className="bg-blue-500 h-2 rounded-full" style={{ width: "12%" }}></div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="bg-purple-50 rounded-xl p-5">
-            <div className="flex items-center mb-4">
-              <Activity className="h-6 w-6 text-purple-600 mr-3" />
-              <h4 className="font-montserrat font-semibold text-lg">Mood & Activity</h4>
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-center">
-                <span className="text-gray-700 font-medium w-24">Energy</span>
-                <div className="flex-1 mx-2">
-                  <div className="w-full bg-purple-200/50 rounded-full h-2">
-                    <div className="bg-purple-500 h-2 rounded-full" style={{ width: "85%" }}></div>
-                  </div>
-                </div>
-                <span className="text-purple-600 font-medium">High</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-gray-700 font-medium w-24">Alertness</span>
-                <div className="flex-1 mx-2">
-                  <div className="w-full bg-purple-200/50 rounded-full h-2">
-                    <div className="bg-purple-500 h-2 rounded-full" style={{ width: "75%" }}></div>
-                  </div>
-                </div>
-                <span className="text-purple-600 font-medium">Alert</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-gray-700 font-medium w-24">Playfulness</span>
-                <div className="flex-1 mx-2">
-                  <div className="w-full bg-purple-200/50 rounded-full h-2">
-                    <div className="bg-purple-500 h-2 rounded-full" style={{ width: "90%" }}></div>
-                  </div>
-                </div>
-                <span className="text-purple-600 font-medium">Very High</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div variants={itemVariants} className="mt-6 bg-green-50 rounded-xl p-5">
-          <div className="flex items-center mb-3">
-            <h4 className="font-montserrat font-semibold text-lg">AI Explanation</h4>
+        <motion.div variants={itemVariants} className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6">
+          <div className="flex items-center mb-4">
+            <Brain className="h-6 w-6 text-purple-600 mr-3" />
+            <h4 className="font-montserrat font-semibold text-lg text-gray-800">Behavioral State</h4>
           </div>
-          <p className="text-gray-700">
-            Your dog appears to be very happy and playful, with a relaxed posture and alert expression. The 
-            raised ears, wide open mouth with tongue visible, and bright eyes all indicate positive emotions. 
-            The active body position suggests high energy levels and readiness to play.
-          </p>
-        </motion.div>
-
-        <motion.div variants={itemVariants} className="mt-6 bg-amber-50 border border-amber-100 rounded-xl p-5 flex">
-          <div className="mr-3 flex-shrink-0">
-            <AlertTriangle className="h-5 w-5 text-amber-500" />
-          </div>
-          <div>
-            <h4 className="font-montserrat font-semibold text-amber-800 mb-1">Important Note</h4>
-            <p className="text-amber-700 text-sm">
-              DogEmote AI is designed to provide insights, not replace professional veterinary care. If you have 
-              concerns about your dog's health, please consult with a licensed veterinarian.
-            </p>
+          <div className="space-y-4">
+            {Object.entries(results.mood).map(([state, level]) => (
+              <div key={state} className="flex items-center">
+                <span className="text-gray-700 font-medium w-24 capitalize">{state}</span>
+                <div className="flex-1 px-3">
+                  <div className="w-full bg-purple-100 rounded-full h-2.5">
+                    <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-2.5 rounded-full" 
+                      style={{ width: level.includes('very') ? '90%' : level.includes('highly') ? '80%' : '60%' }} />
+                  </div>
+                </div>
+                <span className="text-purple-600 font-medium capitalize">{level}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
+
+      <motion.div variants={itemVariants} className="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-6 mb-6">
+        <div className="flex items-center mb-3">
+          <SmilePlus className="h-6 w-6 text-green-600 mr-3" />
+          <h4 className="font-montserrat font-semibold text-lg text-gray-800">AI Interpretation</h4>
+        </div>
+        <p className="text-gray-700 leading-relaxed">
+          Based on our analysis, your dog appears to be in an excellent emotional state. The high happiness and playfulness scores, 
+          combined with moderate relaxation levels, suggest a well-balanced and content disposition. The elevated curiosity and 
+          sociability indicators point to an engaged and friendly temperament.
+        </p>
+      </motion.div>
+
+      <motion.div variants={itemVariants} className="bg-amber-50 rounded-xl p-6 flex">
+        <div className="mr-3 flex-shrink-0">
+          <AlertTriangle className="h-5 w-5 text-amber-500" />
+        </div>
+        <div>
+          <h4 className="font-montserrat font-semibold text-amber-800 mb-1">Important Note</h4>
+          <p className="text-amber-700 text-sm">
+            While our AI provides valuable insights into your dog's emotional state, it should not replace professional veterinary 
+            care. If you have concerns about your dog's health or behavior, please consult with a licensed veterinarian.
+          </p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
