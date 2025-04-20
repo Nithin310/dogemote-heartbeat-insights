@@ -1,7 +1,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Book, Video, FileText, Lightbulb, DogBowl } from "lucide-react";
+import { Book, Video, FileText, Lightbulb } from "lucide-react";
+import { DogBowl } from "../components/icons/CustomIcons"; // Use the custom icon instead
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BreedEmotionGuide from "../components/resources/BreedEmotionGuide";
