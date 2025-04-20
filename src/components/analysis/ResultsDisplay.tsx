@@ -2,9 +2,19 @@
 import { SmilePlus, Activity, AlertTriangle, Brain, Loader2, Heart } from 'lucide-react';
 import { motion } from "framer-motion";
 
+// Define proper types for our results data
+interface EmotionResults {
+  emotions: {
+    [key: string]: number;
+  };
+  mood: {
+    [key: string]: string;
+  };
+}
+
 interface ResultsDisplayProps {
   isLoading: boolean;
-  results: any;
+  results: EmotionResults | null;
 }
 
 const ResultsDisplay = ({ isLoading, results }: ResultsDisplayProps) => {
@@ -91,7 +101,7 @@ const ResultsDisplay = ({ isLoading, results }: ResultsDisplayProps) => {
                 <div className="flex-1 px-3">
                   <div className="w-full bg-purple-100 rounded-full h-2.5">
                     <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-2.5 rounded-full" 
-                      style={{ width: level.includes('very') ? '90%' : level.includes('highly') ? '80%' : '60%' }} />
+                      style={{ width: typeof level === 'string' && (level.includes('very') ? '90%' : level.includes('highly') ? '80%' : '60%') }} />
                   </div>
                 </div>
                 <span className="text-purple-600 font-medium capitalize">{level}</span>
