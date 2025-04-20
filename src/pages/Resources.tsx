@@ -105,7 +105,7 @@ const Resources = () => {
                     {[1, 2, 3, 4].map(i => (
                       <div key={i} className="bg-gray-50 rounded-lg overflow-hidden shadow-sm">
                         <img 
-                          src={`https://images.unsplash.com/photo-${1580136579-${i}05686cbcc${i}2}?q=80&w=600&auto=format&fit=crop`} 
+                          src={`https://images.unsplash.com/photo-1550136513-${i}05686cbcc${i}?q=80&w=600&auto=format&fit=crop`}
                           alt="Dog Article" 
                           className="w-full h-48 object-cover"
                         />
@@ -128,7 +128,7 @@ const Resources = () => {
                       <div key={i} className="bg-gray-50 rounded-lg overflow-hidden shadow-sm">
                         <div className="relative">
                           <img 
-                            src={`https://images.unsplash.com/photo-${1580136579-${i}05686cbcc${i}2}?q=80&w=600&auto=format&fit=crop`} 
+                            src={`https://images.unsplash.com/photo-1550136513-${i}05686cbcc${i}?q=80&w=600&auto=format&fit=crop`}
                             alt="Dog Video" 
                             className="w-full h-48 object-cover"
                           />
